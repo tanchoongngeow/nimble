@@ -83,7 +83,7 @@ public class FacebookRealm {
                         newUser.profile.fullName = fbProfiles.getJSONObject(0).get('name')
 
                         // Create a social media account for facebook, FB Connect implies an account :).
-                        facebookService.create(newUser.profile, userID)
+                        // facebookService.create(newUser.profile, userID)
 
                         user = userService.createUser(newUser)
                         if (user.hasErrors()) {
@@ -105,7 +105,7 @@ public class FacebookRealm {
                 throw new DisabledAccountException("The account [$user.id]$user.username accessed via Facebook Connect is disabled")
             }
 
-            def account = new SimpleAccount(user.id, authToken.principal, "FacebookRealm")
+            def account = new SimpleAccount(user.id, authToken.principal, "grails.plugins.nimble.realms.FacebookRealm")
 
             log.info("Successfully logged in user [$user.id]$user.username using Facebook Connect")
             return account
